@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'));
 
 app.get('/', (req, res) => {
-    res.render('home')
+    res.render('partials/home')
 })
 
 app.get('/campgrounds', catchAsync(async (req, res) => {
@@ -70,8 +70,9 @@ app.all('*', (req, res, next) =>{
 })
 
 app.use((err, req, res, next) => {
-    const{statusCode = 500, message = 'Something went wrong'} = err;
-    res.status(statusCode).send(message);
+    const{statusCode = 500} = err;
+    if(!err.message) err.message = 'Oh No, Something went Wrong';
+    res.status(statusCode).render('partials/error', {err});
 })
 
 app.listen(3000, () => {
