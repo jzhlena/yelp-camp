@@ -19,5 +19,17 @@
     <footer>
         <a href="/campgrounds"> All Campgrounds</a>
     </footer>
+    <h2> LEAVE A REVIEW! </h2>
+    <form action="" class="mb-3">
+        <div>
+            <label for="rating">Rating</label>
+            <input type="range" min="1" max="5" name="review[rating]" id="rating">
+        </div>
+        <div class="">
+            <label for="body" class="form-label">Review</label>
+            <textarea name="review[body]" id="body" class="form-control"></textarea>
+        </div>
+        <button class="btn btn-success"> Submit </button>
+    </form>
 </body>
 </html>
