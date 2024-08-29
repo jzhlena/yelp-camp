@@ -50,10 +50,8 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.get('/fakeUser', async(req, res)=>{
-    const user = new User({email: 'colt@gmail.com', username: 'coltttt'});
-    const newUser = await User.register(user, 'chicken');
-    res.send(newUser);
+app.use((req, res, next)=>{
+    res.locals.currentUser=req.user;
 })
 
 app.use('/campgrounds', campgroundRoutes)
