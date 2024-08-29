@@ -35,7 +35,7 @@ const sessionConfig = {
     secret: 'this should be a better secret!',
     resave: false,
     saveUninitialized: true,
-    cookie:{
+    cookie: {
         httpOnly: true,
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7
@@ -50,8 +50,8 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use((req, res, next)=>{
-    res.locals.currentUser=req.user;
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
 })
 
 app.use('/campgrounds', campgroundRoutes)

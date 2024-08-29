@@ -9,10 +9,15 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register', catchAsync(async (req, res) => {
-    const { email, username, password } = req.body;
-    const user = new User({ email, username });
-    const registeredUser = await User.register(user, password);
-    res.redirect('/campgrounds');
+    try{
+        const { email, username, password } = req.body;
+        const user = new User({ email, username });
+        const registeredUser = await User.register(user, password);
+        res.redirect('/login');
+    }
+    catch(e){
+        res.redirect('register')
+    }
 }))
 
 router.get('/login', (req, res) => {
@@ -30,6 +35,7 @@ router.get('/logout', (req, res) =>{
         }
         res.redirect('/campgrounds');
     });
+    res.redirect('/campgrounds');
 })
 
 module.exports = router;
