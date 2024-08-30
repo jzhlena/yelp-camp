@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-const { campgroundSchema, reviewSchema } = require('./schemas.js');
 const session = require('express-session');
 const ExpressError = require('./utils/ExpressError');
 const methodOverride = require('method-override');
@@ -59,7 +58,7 @@ app.use('/campgrounds/:id/reviews', reviewRoutes)
 app.use('/', userRoutes);
 
 app.get('/', (req, res) => {
-    res.render('partials/home')
+    res.render('home')
 })
 
 app.all('*', (req, res, next) => {
@@ -69,7 +68,7 @@ app.all('*', (req, res, next) => {
 app.use((err, req, res, next) => {
     const { statusCode = 500 } = err;
     if (!err.message) err.message = 'Oh No, Something went Wrong';
-    res.status(statusCode).render('partials/error', { err });
+    res.status(statusCode).render('error', { err });
 })
 
 app.listen(3000, () => {
